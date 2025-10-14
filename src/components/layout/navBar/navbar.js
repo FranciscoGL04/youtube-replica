@@ -12,25 +12,23 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import SvgIcon from '@mui/material/SvgIcon';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import AddIcon from '@mui/icons-material/Add';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import YTLogo from "../../../assets/images/logo/youtube.png"
-import Y from "../../../assets/images/logo/y.png"
-import O from "../../../assets/images/logo/o.png"
-import U from "../../../assets/images/logo/u.png"
-import T from "../../../assets/images/logo/t.png"
-import B from "../../../assets/images/logo/b.png"
-import E from "../../../assets/images/logo/e.png"
+import MicIcon from '@mui/icons-material/Mic';
+import YoutubeLogo from "../../../assets/images/logo/YoutubeLogo.png"
+
+
 const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
+  display:"flex",
+  alignItems:"center",
   marginRight: theme.spacing(2),
-  marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
@@ -41,11 +39,10 @@ const Search = styled('div')(({ theme }) => ({
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
-  position: 'absolute',
   pointerEvents: 'none',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'end',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -126,21 +123,29 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+      <Box display="flex" alignItems="center" gap={1}>
+        <IconButton 
+        size="small" 
+        aria-label="Create" 
+        color="inherit"
+        sx={{p: 0.5}}>
+          <Badge color="error">
+            <AddIcon fontSize='small'/>
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <Typography fontWeight={300}>
+        <p>Create</p>
+        </Typography>
+      </Box>
       </MenuItem>
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
+          aria-label="notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+          <Badge color="error">
+            <NotificationsNoneOutlinedIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -161,12 +166,12 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,}}>
       <AppBar position="static" 
       style={{backgroundColor:"white", 
       color:"black",}}>
         <Toolbar 
-        style={{display:'flex',
+        sx={{display:'flex',
         justifyContent:"space-around"}}>
           <IconButton
             size="large"
@@ -180,79 +185,56 @@ export default function PrimarySearchAppBar() {
           <Toolbar>
             <Box sx={{display:"flex",
               justifyContent:"center",
-              alignItems:"center"
+              alignItems:"center",
+              width:"50%"
             }}>
               <Box
               component="img"
-              src={YTLogo}
-              sx={{width:"30px"}}
-              />
-              <Box
-              component="img"
-              src={Y}
-              sx={{height:"15px"}}
-              />
-              <Box
-              component="img"
-              src={O}
-              sx={{height:"15px"}}
-              />
-              <Box
-              component="img"
-              src={U}
-              sx={{height:"15px"}}
-              />
-              <Box
-              component="img"
-              src={T}
-              sx={{height:"15px"}}
-              />
-              <Box
-              component="img"
-              src={U}
-              sx={{height:"15px"}}
-              />
-              <Box
-              component="img"
-              src={B}
-              sx={{height:"15px"}}
-              />
-              <Box
-              component="img"
-              src={E}
-              sx={{height:"15px"}}
+              src={YoutubeLogo}
+              sx={{width:"150px"}}
               />
             </Box>
           </Toolbar>
           <Search
           style={{width:"500px",
+            height:"40px",
           border:"1px solid #D3D3D3",
           WebkitBorderRadius:"20px",
           display:"flex",
-          justifyContent:"space-between",
-          flexDirection:"row-reverse"}}>
-            <SearchIconWrapper style={{backgroundColor:"#D3D3D3", WebkitBorderTopRightRadius:"20px", WebkitBorderBottomRightRadius:"20px"}}>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase 
+          justifyContent:"space-between"}}>
+            <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
+            <SearchIconWrapper sx={{backgroundColor:"#edebebff", WebkitBorderTopRightRadius:"20px", WebkitBorderBottomRightRadius:"20px", display:"flex", height:"100%"}}>
+            <SearchIcon/>
+            </SearchIconWrapper>
           </Search>
+          <IconButton 
+            sx={{backgroundColor:"#edebebff"}}>
+              <MicIcon/>
+            </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+            <IconButton
+            size="large" 
+            aria-label="create" 
+            color="inherit"
+            sx={{display:"flex", alignItems:"center", gap:0.5, backgroundColor:"#edebebff", WebkitBorderRadius:"35px", padding:"0 0 1 1"}}>
+              <Badge  color="error">
+                <AddIcon />
               </Badge>
+              <Typography fontSize="small" fontWeight="bold">
+                Create
+              </Typography>
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge color="error">
+                <NotificationsNoneOutlinedIcon />
               </Badge>
             </IconButton>
             <IconButton
