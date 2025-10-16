@@ -9,15 +9,17 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import SvgIcon from '@mui/material/SvgIcon';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import MicIcon from '@mui/icons-material/Mic';
 import YoutubeLogo from "../../../assets/images/logo/YoutubeLogo.png"
+import "./css/style.css"
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -165,14 +167,36 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    };
+
+    const tabStyles = {
+      minWidth:'auto',
+      px:2.5,
+      py:1,
+      fontWeight:'bold',
+      borderRadius:50,
+      marginRight:1,
+      bgcolor:'#edebebff',
+      color:'text.primary',
+      '&.Mui-selected':{
+        bgcolor:'black',
+        color:'white',
+      }
+    }
+
+
   return (
+    <>
     <Box sx={{ flexGrow: 1,}}>
-      <AppBar position="static" 
+      <AppBar id="app-bar" position="static" 
       style={{backgroundColor:"white", 
       color:"black",}}>
         <Toolbar 
-        sx={{display:'flex',
-        justifyContent:"space-around"}}>
+        sx={{display:'flex', justifyContent:"space-between"}}>
           <IconButton
             size="large"
             edge="start"
@@ -266,5 +290,39 @@ export default function PrimarySearchAppBar() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
+
+    <Box sx={{ maxWidth:'none', bgcolor: 'background.paper'}}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+        aria-label="scrollable force tabs example"
+        indicatorColor='none'
+      >
+        <Tab className='tab' label="All"  sx={tabStyles}/>
+        <Tab className='tab' label="Music" sx={tabStyles}/>
+        <Tab className='tab' label="Mixes" sx={tabStyles}/>
+        <Tab className='tab' label="Gaming" sx={tabStyles}/>
+        <Tab className='tab' label="Skills" sx={tabStyles}/>
+        <Tab className='tab' label="Podcasts" sx={tabStyles}/>
+        <Tab className='tab' label="Study Skills" sx={tabStyles}/>
+        <Tab className='tab' label="Computer programming" sx={tabStyles}/>
+        <Tab className='tab' label="Playlists" sx={tabStyles}/>
+        <Tab className='tab' label="Live" sx={tabStyles}/>
+        <Tab className='tab' label="Thoughts" sx={tabStyles}/>
+        <Tab className='tab' label="Blues Music" sx={tabStyles}/>
+        <Tab className='tab' label="Blues Music" sx={tabStyles}/>
+        <Tab className='tab' label="Editing" sx={tabStyles}/>
+        <Tab className='tab' label="Deep House" sx={tabStyles}/>
+        <Tab className='tab' label="Sports tournaments" sx={tabStyles}/>
+        <Tab className='tab' label="Bodybuilding" sx={tabStyles}/>
+        <Tab className='tab' label="Watched" sx={tabStyles}/>
+        <Tab className='tab' label="New to you" sx={tabStyles}/>
+      </Tabs>
+    </Box>
+   
+    </>
   );
 }
