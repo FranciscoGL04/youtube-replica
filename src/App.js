@@ -1,8 +1,10 @@
-import PrimarySearchAppBar  from "./components/layout/navBar/navbar";
+import Home from "./pages/home/home"
 
 function App() {
 return (
-  <PrimarySearchAppBar/>
+  <>
+  <Home/>
+  </>
 )
 }
 

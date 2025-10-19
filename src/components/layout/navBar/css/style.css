@@ -2,3 +2,12 @@
     box-shadow: none;
 }
 
+.searchBar-mic{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 10px;
+    max-width: 700px;
+    margin: 0 auto 0 20%;
+}

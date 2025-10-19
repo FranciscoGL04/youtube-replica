@@ -11,7 +11,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
@@ -20,6 +19,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import MicIcon from '@mui/icons-material/Mic';
 import YoutubeLogo from "../../../assets/images/logo/YoutubeLogo.png"
 import "./css/style.css"
+import TemporaryDrawer from '../drawer/drawer';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -173,20 +173,27 @@ export default function PrimarySearchAppBar() {
     setValue(newValue);
     };
 
-    const tabStyles = {
-      minWidth:'auto',
-      px:2.5,
-      py:1,
-      fontWeight:'bold',
-      borderRadius:50,
-      marginRight:1,
-      bgcolor:'#edebebff',
-      color:'text.primary',
-      '&.Mui-selected':{
-        bgcolor:'black',
-        color:'white',
-      }
-    }
+  {/*Const for the tab styling*/}
+  const tabStyles = {
+  minWidth: 'auto',
+  px: 1.5,
+  py: 0.5,
+  fontWeight: 550,
+  fontSize: '0.875rem',
+  borderRadius: 2,
+  marginRight: 1,
+  bgcolor: '#f2f2f2',
+  color: 'text.primary',
+  textTransform: 'none',
+  minHeight: '32px',
+  '&.Mui-selected': {
+    bgcolor: 'black',
+    color: 'white',
+  }
+}
+
+
+
 
 
   return (
@@ -196,7 +203,13 @@ export default function PrimarySearchAppBar() {
       style={{backgroundColor:"white", 
       color:"black",}}>
         <Toolbar 
-        sx={{display:'flex', justifyContent:"space-between"}}>
+        sx={{display:'flex',
+            alignItems:'center',
+            justifyContent:"space-between"}}>
+
+
+        {/*left side of the bar*/}
+        <Box sx={{display:"flex", alignItems:"center", gap:0}}>
           <IconButton
             size="large"
             edge="start"
@@ -204,13 +217,11 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+          <TemporaryDrawer sx={{width:"40px"}}/>
           </IconButton>
-          <Toolbar>
             <Box sx={{display:"flex",
               justifyContent:"center",
               alignItems:"center",
-              width:"50%"
             }}>
               <Box
               component="img"
@@ -218,26 +229,52 @@ export default function PrimarySearchAppBar() {
               sx={{width:"150px"}}
               />
             </Box>
-          </Toolbar>
-          <Search
-          style={{width:"500px",
-            height:"40px",
-          border:"1px solid #D3D3D3",
-          WebkitBorderRadius:"20px",
-          display:"flex",
-          justifyContent:"space-between"}}>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-            <SearchIconWrapper sx={{backgroundColor:"#edebebff", WebkitBorderTopRightRadius:"20px", WebkitBorderBottomRightRadius:"20px", display:"flex", height:"100%"}}>
-            <SearchIcon/>
-            </SearchIconWrapper>
-          </Search>
+        </Box>
+
+        {/*center of the navbar*/}
+          <div className='searchBar-mic'>
+  <Search
+    style={{
+      width: "700px",
+      height: "35px",
+      border: "1px solid #D3D3D3",
+      WebkitBorderRadius: "20px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+    <StyledInputBase
+      placeholder="Search"
+      inputProps={{ 'aria-label': 'search' }}
+      sx={{
+        flex: 1,
+        paddingLeft: 2,
+        '& input::placeholder': {
+          fontWeight: '500',
+          color:'#696767ff',
+          opacity: 1
+        }
+      }}
+    />
+    <SearchIconWrapper 
+      sx={{
+        backgroundColor: "#edebebff", 
+        WebkitBorderTopRightRadius: "20px", 
+        WebkitBorderBottomRightRadius: "20px", 
+        display: "flex", 
+        height: "100%"
+      }}>
+      <SearchIcon/>
+    </SearchIconWrapper>
+  </Search>
+          
           <IconButton 
             sx={{backgroundColor:"#edebebff"}}>
               <MicIcon/>
             </IconButton>
+          </div>
+
+          {/*right side of the navbar*/}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
@@ -291,37 +328,38 @@ export default function PrimarySearchAppBar() {
       {renderMenu}
     </Box>
 
-    <Box sx={{ maxWidth:'none', bgcolor: 'background.paper'}}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons
-        allowScrollButtonsMobile
-        aria-label="scrollable force tabs example"
-        indicatorColor='none'
-      >
-        <Tab className='tab' label="All"  sx={tabStyles}/>
-        <Tab className='tab' label="Music" sx={tabStyles}/>
-        <Tab className='tab' label="Mixes" sx={tabStyles}/>
-        <Tab className='tab' label="Gaming" sx={tabStyles}/>
-        <Tab className='tab' label="Skills" sx={tabStyles}/>
-        <Tab className='tab' label="Podcasts" sx={tabStyles}/>
-        <Tab className='tab' label="Study Skills" sx={tabStyles}/>
-        <Tab className='tab' label="Computer programming" sx={tabStyles}/>
-        <Tab className='tab' label="Playlists" sx={tabStyles}/>
-        <Tab className='tab' label="Live" sx={tabStyles}/>
-        <Tab className='tab' label="Thoughts" sx={tabStyles}/>
-        <Tab className='tab' label="Blues Music" sx={tabStyles}/>
-        <Tab className='tab' label="Blues Music" sx={tabStyles}/>
-        <Tab className='tab' label="Editing" sx={tabStyles}/>
-        <Tab className='tab' label="Deep House" sx={tabStyles}/>
-        <Tab className='tab' label="Sports tournaments" sx={tabStyles}/>
-        <Tab className='tab' label="Bodybuilding" sx={tabStyles}/>
-        <Tab className='tab' label="Watched" sx={tabStyles}/>
-        <Tab className='tab' label="New to you" sx={tabStyles}/>
-      </Tabs>
-    </Box>
+  {/*Tabs*/}
+    <Box sx={{ maxWidth: 'none', bgcolor: 'background.paper' }}>
+  <Tabs
+    value={value}
+    onChange={handleChange}
+    variant="scrollable"
+    scrollButtons
+    allowScrollButtonsMobile
+    aria-label="scrollable force tabs example"
+    indicatorColor='none' 
+  >
+    <Tab className='tab' label="All" sx={tabStyles}/>
+    <Tab className='tab' label="Music" sx={tabStyles}/>
+    <Tab className='tab' label="Mixes" sx={tabStyles}/>
+    <Tab className='tab' label="Gaming" sx={tabStyles}/>
+    <Tab className='tab' label="Skills" sx={tabStyles}/>
+    <Tab className='tab' label="Podcasts" sx={tabStyles}/>
+    <Tab className='tab' label="Study Skills" sx={tabStyles}/>
+    <Tab className='tab' label="Computer programming" sx={tabStyles}/>
+    <Tab className='tab' label="Playlists" sx={tabStyles}/>
+    <Tab className='tab' label="Live" sx={tabStyles}/>
+    <Tab className='tab' label="Thoughts" sx={tabStyles}/>
+    <Tab className='tab' label="Blues Music" sx={tabStyles}/>
+    <Tab className='tab' label="Blues Music" sx={tabStyles}/>
+    <Tab className='tab' label="Editing" sx={tabStyles}/>
+    <Tab className='tab' label="Deep House" sx={tabStyles}/>
+    <Tab className='tab' label="Sports tournaments" sx={tabStyles}/>
+    <Tab className='tab' label="Bodybuilding" sx={tabStyles}/>
+    <Tab className='tab' label="Watched" sx={tabStyles}/>
+    <Tab className='tab' label="New to you" sx={tabStyles}/>
+  </Tabs>
+</Box>
    
     </>
   );
