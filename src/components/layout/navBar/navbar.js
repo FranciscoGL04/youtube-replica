@@ -20,6 +20,10 @@ import MicIcon from '@mui/icons-material/Mic';
 import YoutubeLogo from "../../../assets/images/logo/YoutubeLogo.png"
 import "./css/style.css"
 import TemporaryDrawer from '../drawer/drawer';
+import ButtonBase from '@mui/material/ButtonBase';
+import { useState } from "react";
+
+
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -41,10 +45,10 @@ const Search = styled('div')(({ theme }) => ({
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
-  pointerEvents: 'none',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'end',
+  cursor:'pointer'
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -61,7 +65,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
+  const [searchQuery, setSearchQuery] = useState("");
+  console.log("Navbar received searchVideo:", searchVideo);
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -109,63 +116,62 @@ export default function PrimarySearchAppBar() {
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
+  <Menu
+    anchorEl={mobileMoreAnchorEl}
+    anchorOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    id={mobileMenuId}
+    keepMounted
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    open={isMobileMenuOpen}
+    onClose={handleMobileMenuClose}
+  >
+    <MenuItem>
       <Box display="flex" alignItems="center" gap={1}>
-        <IconButton 
-        size="small" 
-        aria-label="Create" 
-        color="inherit"
-        sx={{p: 0.5}}>
+        <ButtonBase 
+          component="div"  // <- prevents nested <button>
+          onClick={() => console.log("Create clicked")}
+          sx={{ display: 'flex', alignItems: 'center', p: 0.5 }}
+        >
           <Badge color="error">
             <AddIcon fontSize='small'/>
           </Badge>
-        </IconButton>
+        </ButtonBase>
         <Typography fontWeight={300}>
-        <p>Create</p>
+          Create
         </Typography>
       </Box>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="notifications"
-          color="inherit"
-        >
-          <Badge color="error">
-            <NotificationsNoneOutlinedIcon />
-          </Badge>
-        </IconButton>
+    </MenuItem>
+
+    <MenuItem>
+      <ButtonBase 
+        component="div"  // <- prevents nested <button>
+        sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+        onClick={() => console.log("Notifications clicked")}
+      >
+        <Badge color="error">
+          <NotificationsNoneOutlinedIcon />
+        </Badge>
         <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
+      </ButtonBase>
+    </MenuItem>
+
+    <MenuItem onClick={handleProfileMenuOpen}>
+      <ButtonBase 
+        component="div"  // <- prevents nested <button>
+        sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+      >
+        <AccountCircle />
         <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+      </ButtonBase>
+    </MenuItem>
+  </Menu>
+);
 
   const [value, setValue] = React.useState(0);
 
@@ -210,7 +216,7 @@ export default function PrimarySearchAppBar() {
 
         {/*left side of the bar*/}
         <Box sx={{display:"flex", alignItems:"center", gap:0}}>
-          <IconButton
+          <Box
             size="large"
             edge="start"
             color="inherit"
@@ -218,7 +224,7 @@ export default function PrimarySearchAppBar() {
             sx={{ mr: 2 }}
           >
           <TemporaryDrawer sx={{width:"40px"}}/>
-          </IconButton>
+          </Box>
             <Box sx={{display:"flex",
               justifyContent:"center",
               alignItems:"center",
@@ -242,7 +248,9 @@ export default function PrimarySearchAppBar() {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center"
-    }}>
+    }}
+  
+    >
     <StyledInputBase
       placeholder="Search"
       inputProps={{ 'aria-label': 'search' }}
@@ -255,8 +263,14 @@ export default function PrimarySearchAppBar() {
           opacity: 1
         }
       }}
+      value={searchVideo}
+    onChange={(e) =>setSearchVideo(e.target.value)
+      
+    }
+    
     />
     <SearchIconWrapper 
+     onClick={() => console.log(searchVideo)}
       sx={{
         backgroundColor: "#edebebff", 
         WebkitBorderTopRightRadius: "20px", 
