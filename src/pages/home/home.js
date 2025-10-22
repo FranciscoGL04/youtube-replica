@@ -7,8 +7,6 @@ import { useState } from "react";
 function Home() {
 const [searchVideo, setSearchVideo]= useState("");
 const filteredVideos =  Videos.filter(video => video.title.toLowerCase().includes(searchVideo.toLowerCase()))
-console.log("searchVideo:", searchVideo);
-console.log("matching titles:", Videos.filter(video => video.title.toLowerCase().includes(searchVideo.toLowerCase())).map(v => v.title));
     return(
       
 

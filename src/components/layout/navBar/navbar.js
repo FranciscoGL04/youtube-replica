@@ -22,6 +22,7 @@ import "./css/style.css"
 import TemporaryDrawer from '../drawer/drawer';
 import ButtonBase from '@mui/material/ButtonBase';
 import { useState } from "react";
+import LoginPage from '../loginPage/login';
 
 
 
@@ -55,6 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
+    
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -67,7 +69,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
   const [searchQuery, setSearchQuery] = useState("");
-  console.log("Navbar received searchVideo:", searchVideo);
   
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -134,7 +135,7 @@ export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
     <MenuItem>
       <Box display="flex" alignItems="center" gap={1}>
         <ButtonBase 
-          component="div"  // <- prevents nested <button>
+          component="div" 
           onClick={() => console.log("Create clicked")}
           sx={{ display: 'flex', alignItems: 'center', p: 0.5 }}
         >
@@ -150,7 +151,7 @@ export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
 
     <MenuItem>
       <ButtonBase 
-        component="div"  // <- prevents nested <button>
+        component="div"  
         sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
         onClick={() => console.log("Notifications clicked")}
       >
@@ -163,7 +164,7 @@ export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
 
     <MenuItem onClick={handleProfileMenuOpen}>
       <ButtonBase 
-        component="div"  // <- prevents nested <button>
+        component="div"  
         sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
       >
         <AccountCircle />

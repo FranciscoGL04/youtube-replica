@@ -24,7 +24,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ResponsiveTopVideosGrid( {videos = []}) {
-  console.log("Videos received in Grid:", videos);
   return (
     <Box sx={{ flexGrow: 1}}>
       <Grid container justifyContent="flex-end" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} sx={{margin:'2%'}}>
