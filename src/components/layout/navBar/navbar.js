@@ -22,7 +22,8 @@ import "./css/style.css"
 import TemporaryDrawer from '../drawer/drawer';
 import ButtonBase from '@mui/material/ButtonBase';
 import { useState } from "react";
-import LoginPage from '../loginPage/login';
+import { Link } from "react-router-dom";
+
 
 
 
@@ -110,7 +111,7 @@ export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <Link to="/login">Login</Link>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );

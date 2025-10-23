@@ -1,6 +1,6 @@
 import PrimarySearchAppBar  from "../../components/layout/navBar/navbar";
-import ResponsiveTopVideosGrid from "../../components/layout/bodyDisplay/bodyDisplay";
-import Videos from "../../components/layout/bodyDisplay/videos.json"
+import ResponsiveTopVideosGrid from "../videos/videos";
+import Videos from "../videos/videos.json"
 import { useState } from "react";
 
 
