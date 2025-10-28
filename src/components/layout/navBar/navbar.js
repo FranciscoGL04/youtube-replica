@@ -22,7 +22,8 @@ import "./css/style.css"
 import TemporaryDrawer from '../drawer/drawer';
 import ButtonBase from '@mui/material/ButtonBase';
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink} from "react-router-dom";
+import Link from '@mui/material/Link';
 
 
 
@@ -111,8 +112,20 @@ export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link to="/login">Login</Link>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem>
+      <Link 
+      component={RouterLink}
+      to="/login" 
+      sx={{
+        textAlign:'inherit',
+        font:'inherit',
+        textDecoration:'none',
+        color:'inherit',
+        width:'100%'
+      }}>
+      Login
+      </Link>
+      </MenuItem>
     </Menu>
   );
 

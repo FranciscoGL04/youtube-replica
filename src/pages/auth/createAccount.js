@@ -2,14 +2,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled, GlobalStyles} from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Link as RouterLink} from "react-router-dom";
 import "./style.css"
 
 // Simple icons as SVG components
@@ -62,13 +60,10 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
     backgroundRepeat: 'no-repeat',
 }));
 
-export default function Login() {
-    const [emailError, setEmailError] = React.useState(false);
-    const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-    const [passwordError, setPasswordError] = React.useState(false);
-    const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+export default function CreateAccount() {
     const [nameError, setNameError] = React.useState(false);
     const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+    const [name, setName] = React.useState('');
 
     const theme = createTheme({
         palette: {
@@ -76,38 +71,17 @@ export default function Login() {
         },
     });
 
-    const validateInputs = () => {
-        const email = document.getElementById('email');
-        const password = document.getElementById('password');
-        const name = document.getElementById('name');
+    const validateName = () => {
 
         let isValid = true;
 
-        if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-            setEmailError(true);
-            setEmailErrorMessage('Please enter a valid email address.');
-            isValid = false;
-        } else {
-            setEmailError(false);
-            setEmailErrorMessage('');
-        }
-
-        if (!password.value || password.value.length < 6) {
-            setPasswordError(true);
-            setPasswordErrorMessage('Password must be at least 6 characters long.');
-            isValid = false;
-        } else {
-            setPasswordError(false);
-            setPasswordErrorMessage('');
-        }
-
-        if (!name.value || name.value.length < 1) {
+        if (!name || name.trim() === " ") {
             setNameError(true);
-            setNameErrorMessage('Name is required.');
+            setNameErrorMessage('Enter first name');
             isValid = false;
         } else {
             setNameError(false);
-            setNameErrorMessage('');
+            setNameErrorMessage("");
         }
 
         return isValid;
@@ -115,14 +89,14 @@ export default function Login() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (!validateInputs()) {
+
+        if (!validateName()) {
             return;
         }
         const data = new FormData(event.currentTarget);
         console.log({
             name: data.get('name'),
-            email: data.get('email'),
-            password: data.get('password'),
+            surname: data.get('surname')
         });
         // Add your signup logic here
     };
@@ -146,10 +120,10 @@ export default function Login() {
                         variant="h4"
                         sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
                     >
-                        Sign up
+                        Create a Google account
                     </Typography>
                     <Typography>
-                        with your Google Account to continue to YouTube. This account will be available to other Google apps in the browser.
+                        Enter your name
                     </Typography>
                     <Box
                         component="form"
@@ -158,25 +132,21 @@ export default function Login() {
                     >
 
                         <Box sx={{ width: 500, maxWidth: '100%' }}>
-                            <TextField fullWidth label="Email or phone" id="fullWidth" />
+                            <TextField 
+                            fullWidth 
+                            label="First name" 
+                            id="name" 
+                            value={name} 
+                            onChange={(e) => setName (e.target.value)}
+                            error= {nameError}
+                            helperText={nameErrorMessage}
+                            />
                         </Box>
-                        <Typography>
-                            <Link sx={{textDecoration: 'none'}}>
-                                Forgot email?
-                            </Link>
-                        </Typography>
-                        <Typography>
-                            Not your computer? Use Guest mode to sign in privately.<Link sx={{textDecoration:'none'}}> Learn more about using Guest mode </Link>
-                        </Typography>
-                        
+                        <Box sx={{ width: 500, maxWidth: '100%' }}>
+                            <TextField fullWidth label="Surname (optional)"  id="surname" />
+                        </Box>         
                         <Box sx={{display:'flex', justifyContent:'space-between'}}>
-                        <Typography>
-                            <Link
-                            component={RouterLink}
-                            to="/create-account" 
-                            sx={{textDecoration:'none'}}>Create account</Link>
-                        </Typography>
-                        <Button
+                        <Button id='next-btn'
                             type="submit"
                             variant="contained"
                             sx={{borderRadius:30}}
