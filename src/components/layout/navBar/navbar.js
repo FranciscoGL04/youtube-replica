@@ -69,9 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
-  const [searchQuery, setSearchQuery] = useState("");
-  
+export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -194,7 +192,6 @@ export default function PrimarySearchAppBar({searchVideo, setSearchVideo}) {
     setValue(newValue);
     };
 
-  {/*Const for the tab styling*/}
   const tabStyles = {
   minWidth: 'auto',
   px: 1.5,
