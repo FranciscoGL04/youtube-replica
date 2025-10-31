@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,10 +8,10 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
-import { styled, GlobalStyles} from '@mui/material';
+import { styled, GlobalStyles } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Link as RouterLink} from "react-router-dom";
-import "./style.css"
+import { Link as RouterLink } from "react-router-dom";
+import "./style.css";
 
 // Simple icons as SVG components
 const GoogleIcon = () => (
@@ -21,7 +22,6 @@ const GoogleIcon = () => (
         <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3Z" />
     </svg>
 );
-
 
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
@@ -51,6 +51,15 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Login() {
+    // Define all state variables for error handling
+    const [emailError, setEmailError] = useState(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+    const [passwordError, setPasswordError] = useState(false);
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+
+    const [nameError, setNameError] = useState(false);
+    const [nameErrorMessage, setNameErrorMessage] = useState('');
 
     const theme = createTheme({
         palette: {
@@ -109,67 +118,66 @@ export default function Login() {
         // Add your signup logic here
     };
 
-    return (<>
-        <GlobalStyles styles={{
-            html: {margin:0, padding:0, height:'100%'},
-            body: {margin:0, padding:0, height:'100%'},
-            '#root':{height:'100%'}
-            }}/>
-        <ThemeProvider theme={theme}>
-
-            <CssBaseline />
-            <SignUpContainer direction="column" justifyContent="space-between">
-                <Card variant="outlined" sx={{width:'100vw', height:'100vh', margin:0}}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1}}>
-                        <GoogleIcon/>
-                    </Box>
-                    <Typography
-                        component="h1"
-                        variant="h4"
-                        sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
-                    >
-                        Sign up
-                    </Typography>
-                    <Typography>
-                        with your Google Account to continue to YouTube. This account will be available to other Google apps in the browser.
-                    </Typography>
-                    <Box
-                        component="form"
-                        onSubmit={handleSubmit}
-                        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
-                    >
-
-                        <Box sx={{ width: 500, maxWidth: '100%' }}>
-                            <TextField fullWidth label="Email or phone" id="fullWidth" />
+    return (
+        <>
+            <GlobalStyles styles={{
+                html: { margin: 0, padding: 0, height: '100%' },
+                body: { margin: 0, padding: 0, height: '100%' },
+                '#root': { height: '100%' }
+            }} />
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <SignUpContainer direction="column" justifyContent="space-between">
+                    <Card variant="outlined" sx={{ width: '100vw', height: '100vh', margin: 0 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <GoogleIcon />
                         </Box>
-                        <Typography>
-                            <Link sx={{textDecoration: 'none'}}>
-                                Forgot email?
-                            </Link>
-                        </Typography>
-                        <Typography>
-                            Not your computer? Use Guest mode to sign in privately.<Link sx={{textDecoration:'none'}}> Learn more about using Guest mode </Link>
-                        </Typography>
-                        
-                        <Box sx={{display:'flex', justifyContent:'space-between'}}>
-                        <Typography>
-                            <Link
-                            component={RouterLink}
-                            to="/create-account" 
-                            sx={{textDecoration:'none'}}>Create account</Link>
-                        </Typography>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{borderRadius:30}}
+                        <Typography
+                            component="h1"
+                            variant="h4"
+                            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
                         >
-                            Next
-                        </Button>
+                            Sign up
+                        </Typography>
+                        <Typography>
+                            with your Google Account to continue to YouTube. This account will be available to other Google apps in the browser.
+                        </Typography>
+                        <Box
+                            component="form"
+                            onSubmit={handleSubmit}
+                            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+                        >
+                            <Box sx={{ width: 500, maxWidth: '100%' }}>
+                                <TextField fullWidth label="Email or phone" id="email" />
+                            </Box>
+                            <Typography>
+                                <Link sx={{ textDecoration: 'none' }}>
+                                    Forgot email?
+                                </Link>
+                            </Typography>
+                            <Typography>
+                                Not your computer? Use Guest mode to sign in privately.<Link sx={{ textDecoration: 'none' }}> Learn more about using Guest mode </Link>
+                            </Typography>
+
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography>
+                                    <Link
+                                        component={RouterLink}
+                                        to="/create-account"
+                                        sx={{ textDecoration: 'none' }}>Create account</Link>
+                                </Typography>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{ borderRadius: 30 }}
+                                >
+                                    Next
+                                </Button>
+                            </Box>
                         </Box>
-                    </Box>
-                </Card>
-            </SignUpContainer>
-        </ThemeProvider>
+                    </Card>
+                </SignUpContainer>
+            </ThemeProvider>
         </>
     );
 }
